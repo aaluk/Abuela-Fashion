@@ -6,7 +6,6 @@ const { db, allQuestions, allAnswers, postQuestion, postAnswer, qHelpfulness, aH
 app.use(express.json());
 
 app.get('/qa/questions', (req, res) => {
-  console.log(req.query);
   allQuestions(req.query.product_id, req.query.page, req.query.count, (err, result) => {
     if (err) {
       res.send(err);
@@ -37,8 +36,6 @@ app.post('/qa/questions/', (req, res) => {
 })
 
 app.post('/qa/questions/:question_id/answers', (req, res) => {
-  console.log(req.params);
-  console.log(req.body);
   const date = Date.now();
   postAnswer(req.params.question_id, req.body, date, (err, result) => {
     if (err) {

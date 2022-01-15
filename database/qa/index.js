@@ -66,13 +66,15 @@ const postQuestion = function(data, date, callback) {
     .catch( err => callback(err));
 }
 
-const postAnswer = function(question_id, data, date, callback) {
+const postAnswer = async function(question_id, data, date, callback) {
   let {body, name, email, photos} = data;
+  // photos = JSON.parse(photos);
   let queryString = "INSERT INTO answers(question_id, body, date, answerer_name, answerer_email, reported, helpfulness) VALUES ($1, $2, $3, $4, $5, 0, 0);"
   let queryArray = [question_id, body, date, name, email];
-  db.query(queryString, queryArray)
+  await db.query(queryString, queryArray)
     .then( result => callback(null))
     .catch( err => callback(err));
+
 
   //PUT THE PICTURE
 }
