@@ -23,7 +23,7 @@ export default function Answer({ questionObj }) {
 
     const getAnswers = async () => {
       try {
-        const res = await axios.get(`${serverURL}/qa/question/answers`, {
+        const res = await axios.get(`http://localhost:8080/qa/questions/${questionObj.question_id}/answers`, {
           signal: abortCont.signal,
           params: {
             question_id: questionObj.question_id,
@@ -50,7 +50,7 @@ export default function Answer({ questionObj }) {
     e.preventDefault();
     try {
       const body = {};
-      const res = await axios.put(`${serverURL}/qa/answer/helpful`, body, {
+      const res = await axios.put(`http://localhost:8080/qa/answers/${answerObj.answer_id}/helpful`, body, {
         params: {
           answer_id: answerObj.answer_id,
         },
@@ -90,7 +90,7 @@ export default function Answer({ questionObj }) {
     e.preventDefault();
     try {
       const body = {};
-      const res = await axios.put(`${serverURL}/qa/answer/report`, body, {
+      const res = await axios.put(`http://localhost:8080/qa/answers/${answerObj.answer_id}/report`, body, {
         params: {
           answer_id: answerObj.answer_id,
         },

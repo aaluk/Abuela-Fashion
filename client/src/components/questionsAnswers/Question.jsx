@@ -26,7 +26,7 @@ export default function Question({ questionObj }) {
     e.stopPropagation();
     try {
       const body = {};
-      const res = await axios.put(`${serverURL}/qa/question/helpful`, body, {
+      const res = await axios.put(`http://localhost:8080/qa/questions/${questionObj.question_id}/helpful`, body, {
         params: {
           question_id: questionObj.question_id,
         },
@@ -64,7 +64,7 @@ export default function Question({ questionObj }) {
     e.stopPropagation();
     const body = {};
     try {
-      const res = await axios.put(`${serverURL}/qa/question/report`, body, {
+      const res = await axios.put(`http://localhost:8080/qa/questions/${questionObj.question_id}/report`, body, {
         params: {
           question_id: questionObj.question_id,
         },

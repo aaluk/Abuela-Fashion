@@ -41,7 +41,7 @@ export default function QuestionsAnswers() {
   useEffect(() => {
     const getQs = async () => {
       try {
-        const res = await axios.get(`${serverURL}/qa/questions`, {
+        const res = await axios.get(`http://localhost:8080/qa/questions`, {
           params: {
             product_id: selectedProduct?.id,
             // page: 1,

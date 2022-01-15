@@ -1,8 +1,10 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const port = 8080;
 const { db, allQuestions, allAnswers, postQuestion, postAnswer, qHelpfulness, aHelpfulness, qReport, aReport } = require('../database/qa/index.js');
 
+app.use(cors());
 app.use(express.json());
 
 app.get('/qa/questions', (req, res) => {
