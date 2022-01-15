@@ -50,3 +50,7 @@ ALTER TABLE IF EXISTS public.answers
 
 ALTER TABLE IF EXISTS public.photos
     ALTER COLUMN id RESTART SET START 2063760;
+
+CREATE INDEX questions_productId_index ON questions (product_id);
+CREATE INDEX answers_questionId_index ON answers(question_id);
+CREATE INDEX photos_answerId_index ON photos(answer_id);

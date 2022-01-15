@@ -5,14 +5,14 @@ import { Counter } from 'k6/metrics';
 export const requests = new Counter('http_reqs');
 
 export const options = {
-  vus: 100,
+  vus: 1000,
   duration: '15s'
 }
 //get questions
-//const url = 'http://localhost:8080/qa/questions?product_id=450&count=10&page=1';
+const url = 'http://localhost:8080/qa/questions?product_id=450&count=10&page=1';
 
 //get answers
-const url = 'http://localhost:8080/qa/questions/300/answers?page=1&count=10';
+// const url = 'http://localhost:8080/qa/questions/300/answers?page=1&count=10';
 
 export default function () {
   const res = http.get(url);
