@@ -5,7 +5,7 @@ import { Counter } from 'k6/metrics';
 export const requests = new Counter('http_reqs');
 
 export const options = {
-  vus: 1000,
+  vus: 100,
   duration: '15s'
 }
 //get questions

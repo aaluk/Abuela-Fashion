@@ -1,5 +1,30 @@
-const pgp = require('pg-promise')();
-const db = pgp('postgres://s130655@localhost:5432/qa')
+// const pgp = require('pg-promise')();
+// const db = pgp('postgres://s130655@localhost:5432/qa')
+
+const { Pool } = require('pg');
+
+const db = new Pool({
+  host: 'ec2-3-94-121-231.compute-1.amazonaws.com',
+  port: 5432,
+  user: 's130655',
+  password: 'ubuntu',
+  database: 'qa',
+  max: 50
+  // idleTimeoutMillis: 30000,
+  // connectionTimeoutMillis: 2000
+})
+
+// const db = new Pool({
+//   host: 'localhost',
+//   port: 5432,
+//   user: 's130655',
+//   database: 'qa',
+//   max: 50
+//   // idleTimeoutMillis: 30000,
+//   // connectionTimeoutMillis: 2000
+// })
+
+//pooling to optimize
 
 // db.any('SELECT * FROM questions WHERE product_id = 1 limit 20')
 //   .then(function (data) {
@@ -22,7 +47,7 @@ const allQuestions = async function (product_id, page, count, callback) {
     .then((data) => {
       let result = {
         product_id: product_id,
-        results: data
+        results: data.rows
       }
       callback(null, result);
     })
@@ -32,7 +57,7 @@ const allQuestions = async function (product_id, page, count, callback) {
 
 }
 
-const allAnswers = function(question_id, page, count, callback) {
+const allAnswers = async function(question_id, page, count, callback) {
   question_id = question_id || 1;
   page = page || 1;
   count = count || 5;
@@ -48,7 +73,7 @@ const allAnswers = function(question_id, page, count, callback) {
         question: question_id,
         page: page,
         count: count,
-        results: data
+        results: data.rows
       }
       callback(null, result);
     })
@@ -114,7 +139,7 @@ const aReport = function(answer_id, callback) {
 console.log('Connected to the database');
 
 module.exports = {
-  pgp,
+  // pgp,
   db,
   allQuestions,
   allAnswers,
